@@ -1,0 +1,19 @@
+qemu-img create -f qcow2 -o preallocation=off demo.qcow2 25G
+
+virt-install \
+-n my-vm \
+--osinfo=ubuntujammy \
+--memory=4096 \
+--vcpus=2,sockets=1,cores=2,threads=1 \
+--cpu host \
+--network type=direct,source=eth0,source_mode=bridge,model=virtio \
+--disk='/home/mnorouzi/demo.qcow2',bus=virtio \
+--location=/home/mnorouzi/ubuntu-24.04.3-live-server-amd64.iso,kernel=casper/vmlinuz,initrd=casper/initrd \
+--noautoconsole \
+--graphics=vnc,password=password,listen=0.0.0.0
+
+# to find the port:
+virsh -c qemu:///system vncdisplay my-vm
+
+
+for connecting to the vm use vncviewer 127.0.0.1:5900
