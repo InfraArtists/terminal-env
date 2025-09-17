@@ -17,3 +17,18 @@ virsh -c qemu:///system vncdisplay my-vm
 
 
 for connecting to the vm use vncviewer 127.0.0.1:5900
+
+# snapshot
+virsh snapshot-create-as my-vm --name fresh-os
+
+# revert to snapshot
+virsh snapshot-revert my-vm fresh-os
+
+# delete snapshot
+virsh snapshot-delete my-vm fresh-os
+
+# delete vm
+virsh destroy my-vm
+virsh undefine my-vm --remove-all-storage
+
+
