@@ -112,7 +112,7 @@ source $ZSH/oh-my-zsh.sh
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/terraform terraform
 
-# Added by sudoix
+
 if [ -f ~/.zsh_aliases ]; then
     . ~/.zsh_aliases
 fi
@@ -134,3 +134,19 @@ mkcd() { mkdir -p "$@" && cd "$@" ; }
 export now='--grace-period 0 --force'
 ## namespaces (poor man's `kubens`)
 export nk='-n kube-system'
+pkill ibus
+
+# fzf keybindings
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# auto git pull
+autoload -U add-zsh-hook
+
+auto_git_pull() {
+  if [ -d .git ]; then
+    echo "Git repo detected, pulling..."
+    git pull --ff-only
+  fi
+}
+
+add-zsh-hook chpwd auto_git_pull
