@@ -78,9 +78,6 @@ set nopaste
 " https://github.com/ycm-core/YouCompleteMe/issues/4134#issuecomment-1446235584
 " packadd YouCompleteMe
 
-" Using system's clipboard
-set clipboard=unnamed
-
 
 " Spell checking
 setlocal spell spelllang=en_us

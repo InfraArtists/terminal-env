@@ -5,7 +5,7 @@ LN="ln -fs"
 
 # Install some packages
 sudo apt update && sudo apt install -y python3-pip python3-venv curl git tmux \
-  python3-full xclip zsh-autosuggestions zsh-syntax-highlighting vim ncal tree\
+  python3-full xclip zsh-autosuggestions zsh-syntax-highlighting vim-gtk3 ncal tree\
   gnupg software-properties-common flameshot kazam vlc aptitude nload aria2 \
   gcc make perl terminator jcal remmina keepassxc p7zip-full rar unrar bmon \
   gnome-tweaks gnome-shell-extension-manager ipython3 tldr nodejs xournalpp
