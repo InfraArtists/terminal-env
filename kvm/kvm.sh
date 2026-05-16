@@ -9,7 +9,7 @@ fi
 sudo  apt install cpu-checker
 kvm-ok
 sudo apt install -y qemu-kvm virt-manager libvirt-daemon-system virtinst \
-  libvirt-clients bridge-utils
+  libvirt-clients bridge-utils libguestfs-tools
 sudo systemctl enable --now libvirtd
 sudo systemctl status libvirtd
 sudo adduser $USER kvm
