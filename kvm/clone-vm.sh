@@ -211,6 +211,23 @@ else
   echo "No supported network configuration system found" >&2
   exit 1
 fi
+
+# Ensure the SSH server is installed, has host keys, and is running.
+# virt-sysprep's default "ssh-hostkeys" operation strips host keys from the
+# clone, and cloned images sometimes lack openssh-server entirely, so sshd
+# fails to start unless we repair this on first boot.
+if command -v apt-get >/dev/null 2>&1; then
+  dpkg -s openssh-server >/dev/null 2>&1 || apt-get update -y && apt-get install -y openssh-server || true
+elif command -v dnf >/dev/null 2>&1; then
+  rpm -q openssh-server >/dev/null 2>&1 || dnf install -y openssh-server || true
+elif command -v yum >/dev/null 2>&1; then
+  rpm -q openssh-server >/dev/null 2>&1 || yum install -y openssh-server || true
+fi
+
+ssh-keygen -A || true
+
+systemctl enable --now ssh 2>/dev/null || systemctl enable --now sshd 2>/dev/null || true
+systemctl restart ssh 2>/dev/null || systemctl restart sshd 2>/dev/null || true
 EOF
 }
 
@@ -240,6 +257,7 @@ for ((i=1; i<=CLONE_COUNT; i++)); do
     --domain "$CLONE_NAME" \
     --hostname "$CLONE_NAME" \
     --password "${VM_USER}:password:${VM_PASSWORD}" \
+    --operations defaults,-ssh-userdir \
     --firstboot "$firstboot_script"
 
   rm -f "$firstboot_script"
