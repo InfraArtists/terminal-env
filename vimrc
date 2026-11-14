@@ -27,7 +27,7 @@ Plug 'evanleck/vim-svelte', {'branch': 'main'}
 Plug 'prettier/vim-prettier', { 'do': 'npm install' }
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'mrk21/yaml-vim' " For YAML syntax/indentation
-Plug 'Exafunction/codeium.vim', { 'branch': 'main' } " codeium
+Plug 'github/copilot.vim' " AI completion (Codeium was shut down Nov 2026)
 Plug 'rodjek/vim-puppet' " For Puppet syntax highlighting
 Plug 'elzr/vim-json' " For metadata.json
 " Jinja2
